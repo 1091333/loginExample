@@ -1,11 +1,15 @@
 function init() {
+    alert("init");
+    this.deviceReady();
 	document.addEventListener("deviceready", deviceReady, true);
 	delete init;
 }
 
 function checkPreAuth() {
+    alert("checkPreAuth");
 	console.log("checkPreAuth");
     var form = $("#loginForm");
+    alert("passou");
     if(window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
         $("#username", form).val(window.localStorage["username"]);
         $("#password", form).val(window.localStorage["password"]);
@@ -14,6 +18,7 @@ function checkPreAuth() {
 }
 
 function handleLogin() {
+    alert("handleLogin");
     var form = $("#loginForm");    
     //disable the button so we can't resubmit while we wait
     $("#submitButton",form).attr("disabled","disabled");
@@ -21,6 +26,7 @@ function handleLogin() {
     var p = $("#password", form).val();
     if(u != '' && p!= '') {
         $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", {username:u,password:p}, function(res) {
+            alert(res);
             if(res == true) {
                 //store
                 window.localStorage["username"] = u;
@@ -39,6 +45,7 @@ function handleLogin() {
 }
 
 function deviceReady() {
+    alert("deviceReady");
 	console.log("deviceReady");
 	$("#loginPage").on("pageinit",function() {
 		console.log("pageinit run");
